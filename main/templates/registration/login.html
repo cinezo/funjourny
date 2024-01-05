@@ -1,0 +1,16 @@
+{% extends "main/base.html" %}
+{% block title %}Login{% endblock title %}
+{% load crispy_forms_tags %}
+{% load socialaccount %}
+{% block content %}
+<form method="post">
+{% csrf_token %}{{form|crispy}}
+<p>Dont have an account? Create one <a href="/sign-up">here</a></p>
+<button type="submit">Login</button>
+<h2>Or Login with Google!</h2>
+<div class="w3-button w3-round-xlarge w3-border">
+    <img width="48" height="48" src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="google-logo"/>
+    <a href="{% provider_login_url 'google' %}?next=/" style="text-decoration: none;">Login Google</a>
+</div>
+</form>
+{% endblock content %}
