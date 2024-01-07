@@ -2,13 +2,18 @@
 {% load static %}
 {% block title %}All Games{% endblock title %}
 {% block content %}
-{% for game in game_detail %}
-    <div class="w3-card w3-hover-shadow w3-grey w3-from-top">
+{% for cat in game_category %}
+    <li>
+        <ul><a href="{{ cat.slug }}">{{ cat }}</a></ul>
+    </li>
+{% endfor %}
+{% comment %} {% for game in game_detail %}
+    <div onclick="location.href='games/{{ game.slug }}'" class="w3-card w3-hover-shadow w3-grey w3-from-top">
         <img src="{{ game.thumbnail_path.url }}" alt="{{ game.game_name }}-logo" class="w3-round">
         <div class="w3-center w3-text-white">
             <h3>{{ game.game_name }}</h3>
             <a href="games/{{ game.slug }}">Play Game</a>
         </div>
 </div>
-{% endfor %}
+{% endfor %} {% endcomment %}
 {% endblock content %}

@@ -1,0 +1,9 @@
+{% extends "main/base.html" %}
+{% block title %}
+{{ category.game_category }}
+{% endblock title %}
+{% block content %}
+{% for game in category.games.all %}
+<a href="games/{{ game.slug }}">{{ game.game_name }}</a>
+{% endfor %}
+{% endblock content %}

@@ -6,11 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ game.game_name }}</title>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{% static "js/flappy-bird/bird.js" %}"></script>
     <script src="{% static "js/flappy-bird/game.js" %}"></script>
     <script src="{% static "js/flappy-bird/pipe.js" %}"></script>
 </head>
 <body>
-    
+    <script>
+        var current_score = {{ user_score }};
+    </script>
+    <form action="/games/{{ game.slug }}" method="post">
+        {% csrf_token %}
+        <input type="number" name="newscore" id="newscore" hidden>        
+        <button type="submit" id="submit" hidden>Upload your highscore to the Leaderboard?</button>
+    </form>
+    <form action="{% url "home" %}" method="get">
+        <button type="submit" onclick="location.href="{% url "home" %}"">Return to Home</button>
+    </form>
 </body>
 </html>

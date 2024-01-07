@@ -16,11 +16,40 @@ class Game(models.Model):
     def get_absolute_url(self):
         return reverse("game-detail", args=[self.id-1])
     
+    def __str__(self):
+        return f"{self.game_name}"
+    
     def save(self, *args, **kwargs):
         self.slug = slugify(self.game_name)
         super().save(*args, **kwargs)
-    
+
 
 class Ranking(models.Model):
-    player = models.ForeignKey(User, on_delete=models.CASCADE)
+    player = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     game_overall_score = models.IntegerField(null=True)
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f"{self.player}: {self.game_overall_score}"
+    
+
+class Category(models.Model):
+    game_category = models.CharField(max_length=100)
+    games = models.ManyToManyField(Game)
+    slug = models.SlugField(default="", null=False, blank=True)
+    
+    
+    class Meta:
+        verbose_name_plural = "Categories"
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.game_category)
+        super().save(*args, **kwargs)
+    
+    def get_absolute_url(self):
+        return reverse("game_category", args=[self.id-1])
+    
+    def __str__(self):
+        return f"{self.game_category}" 

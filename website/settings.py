@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-from os import getenv 
+ 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -142,7 +142,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'main/static/'
-
+STATIC_ROOT = BASE_DIR / 'static'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -159,5 +159,5 @@ AUTHENTICATION_BACKENDS = (
 SOCIALACCOUNT_LOGIN_ON_GET=True
 
 MEDIA_ROOT = BASE_DIR / 'uploads'
-MEDIA_URL = '/game-media/'
+MEDIA_URL = '/media/'
 

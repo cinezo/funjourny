@@ -2,6 +2,11 @@ var bird;
 var pipes = [];
 var score = 0;
 
+function save_score(new_score) {
+  $('#newscore').val(new_score);
+  $('#submit').click();
+}
+
 function setup() {
   createCanvas(640, 480);
   bird = new Bird();
@@ -18,7 +23,16 @@ function draw() {
     pipes[i].update();
 
     if (pipes[i].hits(bird)) {
-      console.log('HIT');
+      pipes = [];
+      if (score >= current_score) {
+        current_score = score;
+        save_score(score);
+      } else {
+        score = 0;
+        return;
+      }
+      score = 0;
+      return;
     }
 
     if (pipes[i].offscreen()) {
@@ -31,7 +45,9 @@ function draw() {
 
   if (frameCount % 75 == 0) {
     pipes.push(new Pipe());
-  } else if (frameCount % 5 == 0) {
+  }
+  
+  if (frameCount % 5 == 0) {
     score++;
   }
 }
