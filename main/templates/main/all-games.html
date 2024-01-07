@@ -2,12 +2,34 @@
 {% load static %}
 {% block title %}All Games{% endblock title %}
 {% block content %}
+<br>
+<h1>Select Category</h1>
+<br>
+<div class="btn-group p-3 m-2">
 {% for cat in game_category %}
-    <li>
-        <ul><a href="{{ cat.slug }}">{{ cat }}</a></ul>
-    </li>
+        <a type="button" href="games/categories/{{ cat.slug }}" class="btn btn-primary">{{ cat.game_category }}</a>
 {% endfor %}
-{% comment %} {% for game in game_detail %}
+</div>
+<br>
+<h1>Or browse all Games:</h1>
+<br>
+<div class="container mx-auto mt-4">
+    <div class="row">
+        {% for game in game_detail %}
+      <div class="col-md-4 p-2">
+        <div class="card" style="width: 18rem;">
+    <img src="{{ game.thumbnail_path.url }}" class="card-img-top" alt="...">
+    <div class="card-body bg-white text-black">
+      <h5 class="card-title">{{ game.game_name }}</h5>
+      <p class="card-text">{{ game.description }}</p>
+         <a href="games/{{ game.slug }}" class="btn mr-2 text-black"><i class="fas fa-link"></i> Play Game</a>
+    </div>
+    </div>
+</div>    
+{% endfor %}
+</div>  
+{% comment %}
+ {% for game in game_detail %}
     <div onclick="location.href='games/{{ game.slug }}'" class="w3-card w3-hover-shadow w3-grey w3-from-top">
         <img src="{{ game.thumbnail_path.url }}" alt="{{ game.game_name }}-logo" class="w3-round">
         <div class="w3-center w3-text-white">
@@ -15,5 +37,6 @@
             <a href="games/{{ game.slug }}">Play Game</a>
         </div>
 </div>
-{% endfor %} {% endcomment %}
+{% endfor %}
+{% endcomment %}
 {% endblock content %}

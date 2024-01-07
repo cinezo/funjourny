@@ -1,7 +1,23 @@
 {% extends "main/base.html" %}
 {% block title %}Homepage{% endblock title %}
 {% block content %}
-<h1 class="w3-center w3-animate-top">Home Page!</h1>
-<p class="w3-center w3-animate-opacity">NAVIGATE TO THE GAMES OR LOOK THE LEADERBORD</p>
-<h1 class="w3-center w3-animate-right">THIS WEBSITE IS CURRENTLY IN BETA PRODUCTION!!!</h1>
+<br><br><br><br>
+<h1 class="text-center">Hello! Start with one of our TOP GAMES</h1>
+<h6 class="text-center">And dont forget to create an account and battle on the leaderboard</h6>
+<br><br>
+<div class="container mx-auto mt-4">
+    <div class="row">
+        {% for game in top_games %}
+      <div class="col-md-4">
+        <div class="card" style="width: 18rem;">
+    <img src="{{ game.thumbnail_path.url }}" class="card-img-top" alt="...">
+    <div class="card-body bg-white text-black">
+      <h5 class="card-title">{{ game.game_name }}</h5>
+      <p class="card-text">{{ game.description }}</p>
+         <a href="games/{{ game.slug }}" class="btn mr-2 text-black"><i class="fas fa-link"></i> Play Game</a>
+    </div>
+    </div>
+</div>    
+{% endfor %}
+</div>  
 {% endblock content %}

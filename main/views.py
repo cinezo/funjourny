@@ -6,10 +6,17 @@ from django.contrib.auth import login, logout, authenticate
 # Create your views here.
 
 
-class HomeView(TemplateView):
-    template_name = 'main/home.html'
+def homeView(request):
+    top_games = Game.objects.all()
+    return render(request, 'main/home.html', {
+        'top_games': top_games
+    })
 
-
+def showRanking(request):
+    rank = Ranking.objects.all().order_by('-game_overall_score')
+    return render(request, 'main/leaderboard.html', {
+        'ranking': rank
+    })
 
 def sign_up(request):
     if request.method == 'POST':
@@ -28,7 +35,7 @@ def logout_view(request):
     logout(request)
 
 def showByCat(request, slug):
-    cat = Category.objects.get(slug=slug)
+    cat = Category.objects.get(slug=slug).games.all()
     return render(request, 'main/game_category.html', {
         'category': cat
     })

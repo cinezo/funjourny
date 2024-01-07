@@ -10,6 +10,7 @@ User = settings.AUTH_USER_MODEL
 class Game(models.Model):
     game_name = models.CharField(max_length=150)
     slug = models.SlugField(default="", null=False)
+    description = models.CharField(max_length=9999, null=True)
     thumbnail_path = models.ImageField(upload_to='images', null=True)
     script_path = models.CharField(max_length=60, null=True)
     

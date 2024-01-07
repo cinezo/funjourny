@@ -1,0 +1,14 @@
+{% extends "main/base.html" %}
+
+{% block title %}Leaderboard{% endblock title %}
+{% block content %}
+<br><br><br><br>
+<h1 class="text-center">This is the current Leaderboard</h1>
+<div class="d-flex text-center p-4">
+    <ul class=" list-group list-group-flush list-group-numbered">
+        {% for rank in ranking %}
+            <li class="list-group-item">{{ rank.player }} with a total of {{ rank.game_overall_score }}</li>
+        {% endfor %}
+      </ul>
+</div>
+{% endblock content %}

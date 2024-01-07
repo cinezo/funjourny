@@ -3,7 +3,19 @@
 {{ category.game_category }}
 {% endblock title %}
 {% block content %}
-{% for game in category.games.all %}
-<a href="games/{{ game.slug }}">{{ game.game_name }}</a>
+<div class="container mx-auto mt-4">
+    <div class="row">
+        {% for game in category %}
+      <div class="col-md-4">
+        <div class="card" style="width: 18rem;">
+    <img src="{{ game.thumbnail_path.url }}" class="card-img-top" alt="...">
+    <div class="card-body bg-white text-black">
+      <h5 class="card-title">{{ game.game_name }}</h5>
+      <p class="card-text">{{ game.description }}</p>
+         <a href="games/{{ game.slug }}" class="btn mr-2 text-black"><i class="fas fa-link"></i> Play Game</a>
+    </div>
+    </div>
+</div>    
 {% endfor %}
+</div>  
 {% endblock content %}
